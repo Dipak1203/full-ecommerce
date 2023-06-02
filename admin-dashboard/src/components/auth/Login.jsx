@@ -1,22 +1,19 @@
 import React from "react";
 import "./Login.css";
-import Box from "@mui/material/Box";
 
 const Login = () => {
   return (
     <div className="login">
-      <div>
-        <Box
-          sx={{
-            width: 300,
-            height: 300,
-            backgroundColor: "primary.dark",
-            "&:hover": {
-              backgroundColor: "primary.main",
-              opacity: [0.9, 0.8, 0.7],
-            },
-          }}
-        />
+      <div className="login_box shadow-lg" >
+          <h3>Hello !</h3>
+          <p>Sign into your account</p>
+          <input type="email" className="input" placeholder="example@gmail.com" />
+          <input type="password" className="input" placeholder="your password" />
+          <button className="button">Submit</button>
+          <div className="login_content">
+              <input type="checkbox"  /> Remember me
+              <a href="">Forgot password?</a>
+          </div>
       </div>
     </div>
   );
