@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400&family=Roboto:wght@300&family=Work+Sans:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400&family=Poppins:wght@200&family=Roboto:wght@300&family=Work+Sans:wght@100&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --header: #1c2536;
+  --background: #161212;
+  --btn: #00ab55;
+  --text: #9da4ae;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+}
+
+span,
+p,
+li {
+  font-family: 'Mulish', sans-serif;
+}
+.main__content {
+  position: absolute;
+  top: 0;
+  /* left: 10px; */
+  right: 1px;
+  width: 87vw;
+  text-align: center;
+  height: 100vh;
+}
+
+button {
+  border: none;
+  background: var(--header);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  border-radius: 7px;
+  transition: all ease-in-out 0.5s;
+}
+
+button a {
+  color: #fff;
+}
+
+button:hover {
+  background: #26c09e;
+  transition: all ease-in-out 0.5s;
+}
+
+input {
+  outline: none;
+}
+
+textarea {
+  outline: none;
+}
+
+select {
+  padding: 10px;
+  cursor: pointer;
+  outline: none;
+}
+
+table {
+  padding: 10px;
+}
+
+tr {
+  padding: 10px;
+}
+.avatar__section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.profile_heading {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  color: #00ab55;
+  margin-top: 6px;
+}
+
+.avatar {
+  width: 25%;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sidebar {
+  background: var(--header);
+  width: 170px;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+}
+h1 {
+  margin-bottom: 10px;
+}
+h1 a {
+  color: red;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 25px;
+  border-bottom: 3px solid red;
+}
+
+ul li {
+  width: 100%;
+  list-style: none;
+  font-size: 20px;
+  padding: 5px 15px;
+  margin-bottom: 15px;
+  transition: 0.3s ease-in-out;
+}
+
+
+
+ul li a {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s ease-in-out;
+}
+
+.sideBar__content {
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+  margin-left: -30px;
+  margin-top: 20px;
+}
+
+
+.sideBar__content li a{
+  font-weight: 500;
+}
+
+
+.sideBar__content li a:hover{
+  color: var(--btn);
+  cursor: pointer;
+}
