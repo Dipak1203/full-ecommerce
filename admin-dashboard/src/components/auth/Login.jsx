@@ -1,5 +1,4 @@
 import React from "react";
-import "./Login.css";
 import styled from "styled-components";
 
 const Login = () => {
