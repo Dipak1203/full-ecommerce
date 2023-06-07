@@ -40,7 +40,6 @@ const AppContent = () =>{
       <Route path="/store" element={<Store />} />
       <Route path="/products" element={<Products />} />
       <Route path="/product/create" element={<ProductForm />} />
-
       <Route path="/finances" element={<Finances />} />
       <Route path="/invoices" element={<Invoices />} />
       <Route path="/message" element={<Messages />} />
