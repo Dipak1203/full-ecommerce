@@ -13,6 +13,7 @@ import HelpCenter from "./components/pages/HelpCenter";
 import Setting from "./components/pages/Setting";
 import Logout from "./components/pages/Logout";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ProductForm from "./components/forms/ProductForm";
 const App = () => {
   return (
     <BrowserRouter>
@@ -38,6 +39,8 @@ const AppContent = () =>{
       <Route path="/statistics" element={<Statistics />} />
       <Route path="/store" element={<Store />} />
       <Route path="/products" element={<Products />} />
+      <Route path="/product/create" element={<ProductForm />} />
+
       <Route path="/finances" element={<Finances />} />
       <Route path="/invoices" element={<Invoices />} />
       <Route path="/message" element={<Messages />} />

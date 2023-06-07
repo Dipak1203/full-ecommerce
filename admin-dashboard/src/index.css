@@ -8,6 +8,7 @@
 }
 
 
+
 :root {
   --header: #1c2536;
   --background: #161212;
@@ -99,6 +100,7 @@ tr {
   margin-top: 6px;
 }
 
+
 .avatar {
   width: 25%;
   border-radius: 50%;
@@ -112,11 +114,11 @@ tr {
   padding: 0;
   height: 100vh;
   color: #fff;
-  padding: 10px;
   display: flex;
   justify-content: start;
   align-items: start;
   flex-direction: column;
+  position: fixed;
 }
 h1 {
   margin-bottom: 10px;
