@@ -3,7 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import "./src/config/db.js";
 import { SERVER_PORT } from "./src/config/config.js";
-
+import AuthRouter from './src/routes/auth/AuthRouter.js'
 const app = express();
 
 // middleware
@@ -17,6 +17,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
+
+// routes
+app.use("/login",AuthRouter);
 
 const PORT = SERVER_PORT || 5000;
 
