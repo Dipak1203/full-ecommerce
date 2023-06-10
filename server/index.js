@@ -6,6 +6,7 @@ import { SERVER_PORT } from "./src/config/config.js";
 import AuthRouter from './src/routes/auth/AuthRouter.js'
 import categoryRouter from "./src/routes/admin/Products/Category.js";
 import branchRouter from "./src/routes/admin/Products/Branch.js";
+
 const app = express();
 
 // middleware
