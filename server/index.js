@@ -4,6 +4,8 @@ import bodyParser from "body-parser";
 import "./src/config/db.js";
 import { SERVER_PORT } from "./src/config/config.js";
 import AuthRouter from './src/routes/auth/AuthRouter.js'
+import categoryRouter from "./src/routes/admin/Products/Category.js";
+import branchRouter from "./src/routes/admin/Products/Branch.js";
 const app = express();
 
 // middleware
@@ -22,6 +24,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // routes
 app.use("/login",AuthRouter);
+app.use("/product/category",categoryRouter);
+app.use("/product/branch",branchRouter)
 
 const PORT = SERVER_PORT || 5000;
 
