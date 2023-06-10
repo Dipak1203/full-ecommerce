@@ -11,15 +11,12 @@ const AuthController = {
         res.status(400).json({ message: "please fill the form" });
         return; // Return here to exit the function
       }
-
       const checkUser = await adminLoginModel.findOne({ username: username });
-
       if (checkUser) {
         const bcryptPassword = await bcrypt.compare(password, checkUser.password);
-
         if (bcryptPassword) {
-          const token = jwt.sign({id:checkUser._id},"MY_SECRET");
-          console.log(token)
+          const token = jwt.sign({id:checkUser._id},MY_SECRET);
+        //   console.log(token)
           res.json({token});
         } else {
           res.status(401).json({ message: "password does not match" });
