@@ -7,6 +7,7 @@ import AuthRouter from './src/routes/auth/AuthRouter.js'
 import categoryRouter from "./src/routes/admin/Products/Category.js";
 import branchRouter from "./src/routes/admin/Products/Branch.js";
 import sizeRouter from "./src/routes/admin/Products/Size.js";
+import productRouter from "./src/routes/admin/Products/ProductRouter.js";
 
 const app = express();
 
@@ -28,7 +29,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/login",AuthRouter);
 app.use("/product/category",categoryRouter);
 app.use("/product/branch",branchRouter);
-app.use("/product/size",sizeRouter)
+app.use("/product/size",sizeRouter);
+app.use("/product",productRouter)
 
 const PORT = SERVER_PORT || 5000;
 
