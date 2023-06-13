@@ -1,14 +1,99 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import "../pages/style.css";
-import { Group } from "@mui/icons-material";
+import axios from "axios";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ProductForm = () => {
+const [input,setInput] = useState({
+  name:'',
+  price:'',
+  title:'',
+  discount:'',
+  category:'',
+  branch:'',
+  size:'',
+  description:'',
+});
+const [image, setImage] = useState(null);
+
+
+const handleImageChange = (event) => {
+  setImage(event.target.files[0]);
+};
+
+const {
+  name,
+  price,
+  title,
+  discount,
+  category,
+  branch,
+  size,
+  description,
+} = input;
+const handleChange = (e) =>{
+  const {name,value} = e.target;
+  setInput({...input,[name]:value});
+}
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (
+    name === '' ||
+    price === '' ||
+    title === '' ||
+    discount === '' ||
+    category === '' ||
+    branch === '' ||
+    size === '' ||
+    description === '' ||
+    !image
+  ) {
+    toast.error('Please fill in all the fields'); // Display error toast notification
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('price', price);
+  formData.append('title', title);
+  formData.append('discount', discount);
+  formData.append('category', category);
+  formData.append('branch', branch);
+  formData.append('size', size);
+  formData.append('description', description);
+  formData.append('image', image); // Append the image file to the form data
+
+  try {
+    const res = await axios.post("http://localhost:8000/product/create", formData);
+    if (res) {
+      toast.success("Product added");
+      setInput({
+        name: '',
+        price: '',
+        title: '',
+        discount: '',
+        category: '',
+        branch: '',
+        size: '',
+        description: '',
+      })
+      setImage(null);
+    }
+  } catch (error) {
+    toast.error("Failed to add product", error);
+    // Handle error if the request fails
+  }
+};
   return (
     <div className="main__content">
       <Container>
+      <ToastContainer />
         <Row>
           <Col md="6">
             <h2
@@ -17,27 +102,27 @@ const ProductForm = () => {
             >
               Add Products
             </h2>
-            <Form>
+            <Form encType="multipart/form-data">
               <Form.Group
                 className="mb-2 text-start"
                 controlId="exampleForm.ControlInput1"
               >
                 <Form.Label>Name</Form.Label>
-                <Form.Control type="text" placeholder="product name" />
+                <Form.Control type="text" name="name" value={name} onChange={handleChange}  placeholder="product name"/>
               </Form.Group>
               <Form.Group
                 className="mb-2 text-start"
                 controlId="exampleForm.ControlInput1"
               >
                 <Form.Label>Price</Form.Label>
-                <Form.Control type="number" placeholder="product price *" />
+                <Form.Control type="number"  name="price" value={price} onChange={handleChange} placeholder="product price *" />
               </Form.Group>
               <Form.Group
                 className="mb-2 text-start"
                 controlId="exampleForm.ControlInput1"
               >
                 <Form.Label>Title</Form.Label>
-                <Form.Control type="text" placeholder="product title" />
+                <Form.Control type="text"  name="title" value={title} onChange={handleChange} placeholder="product title" />
               </Form.Group>
 
               <Form.Group
@@ -45,14 +130,14 @@ const ProductForm = () => {
                 controlId="exampleForm.ControlInput1"
               >
                 <Form.Label>Discount %</Form.Label>
-                <Form.Control type="number" placeholder="product title" />
+                <Form.Control type="number"  name="discount" value={discount} onChange={handleChange} placeholder="product title" />
               </Form.Group>
               <Form.Group
                 className="mb-2 text-start"
                 controlId="exampleForm.ControlTextarea1"
               >
                 <Form.Label>Product Description</Form.Label>
-                <Form.Control as="textarea" rows={3} />
+                <Form.Control as="textarea" name="description" value={description} onChange={handleChange} rows={3} />
               </Form.Group>
             </Form>
           </Col>
@@ -65,18 +150,18 @@ const ProductForm = () => {
                   width={300}
                 />
               </label>
-              <input type="file" className="input" id="image" />
+              <input type="file" name="image"  onChange={handleImageChange} className="input" id="image" />
             </Content>
             <Form.Group>
-              <Form.Select className="my-3">
+              <Form.Select className="my-3" name="category" value={category} onChange={handleChange}>
                 <option>Select the Category</option>
-                <option>T-shirt</option>
-                <option>Shirt</option>
-                <option>Paint</option>
+                <option value="t-shirt">T-shirt</option>
+                <option value="Shirt">Shirt</option>
+                <option value="Paint">Paint</option>
               </Form.Select>
             </Form.Group>
             <Form.Group>
-              <Form.Select className="my-3">
+              <Form.Select className="my-3" name="branch" value={branch} onChange={handleChange}>
                 <option>Product Branch</option>
                 <option>T-shirt</option>
                 <option>Shirt</option>
@@ -84,19 +169,19 @@ const ProductForm = () => {
               </Form.Select>
             </Form.Group>
             <Form.Group>
-              <Form.Select className="my-3">
+              <Form.Select className="my-3" name="size" value={size} onChange={handleChange}>
                 <option>Product Size</option>
-                <option>XXL</option>
-                <option>XL</option>
-                <option>L</option>
-                <option>Md</option>
-                <option>SM</option>
+                <option value="xxl">XXL</option>
+                <option value="xl">XL</option>
+                <option value="l">L</option>
+                <option value="md">Md</option>
+                <option value="sm">SM</option>
               </Form.Select>
             </Form.Group>
           </Col>
         </Row>
         <div className="text-center mt-5">
-          <Button variant="contained">Submit</Button>
+          <Button variant="contained" onClick={handleSubmit}>Submit</Button>
         </div>
       </Container>
     </div>

@@ -14,9 +14,7 @@ const app = express();
 // middleware
 
 app.use(
-  cors({
-    origin: "http://localhost:5173",
-  })
+  cors()
 );
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
