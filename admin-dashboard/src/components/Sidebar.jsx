@@ -2,6 +2,13 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 const Sidebar = () => {
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
+    window.location.reload(true);
+  };
+  
+
   return (
     <div className="sidebar">
       <div className="avatar__section">
@@ -38,6 +45,9 @@ const Sidebar = () => {
         </li>
         <li style={{ display: "flex", alignItems: "center", gap: "5px" }}>
           <NavLink to="/setting">Setting</NavLink>
+        </li>
+        <li style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+          <NavLink onClick={handleLogout}>Logout</NavLink>
         </li>
       </ul>
     </div>

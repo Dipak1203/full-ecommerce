@@ -13,9 +13,9 @@ import Invoices from "./components/pages/Invoices";
 import Messages from "./components/pages/Messages";
 import HelpCenter from "./components/pages/HelpCenter";
 import Setting from "./components/pages/Setting";
-import Logout from "./components/pages/Logout";
 import ProductForm from "./components/forms/ProductForm";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Logout from "./components/auth/Logout";
 
 const App = () => {
   return (

@@ -2,39 +2,31 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import axios from 'axios';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     try {
-      const response = await fetch('http://localhost:8000/login/AuthAdminActivity', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (response.ok) {
-        const { token } = await response.json();
+      const response = await axios.post(`http://localhost:8000/login/AuthAdminActivity`, { username, password });
+  
+      if (response.status === 200) { // Check the response status code
+        const { token } = response.data; // Access the response data directly
         // Set token in localStorage
         localStorage.setItem('token', token);
         // Redirect to dashboard component
         window.location.href = '/dashboard';
       } else {
-        const { message } = await response.json();
-        // Display error toast
+        const { message } = response.data; // Access the error message from the response data
         toast.error(message);
       }
     } catch (error) {
-      // Handle network or server error
-      console.log('An error occurred:', error);
+      toast.error('password not match:', error);
     }
   };
+  
 
   return (
     <Container>

@@ -70,7 +70,7 @@ const handleSubmit = async (e) => {
   formData.append('image', image); // Append the image file to the form data
 
   try {
-    const res = await axios.post("http://localhost:8000/product/create", formData);
+    const res = await axios.post("/product/create", formData);
     if (res) {
       toast.success("Product added");
       setInput({
