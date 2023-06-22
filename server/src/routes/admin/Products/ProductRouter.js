@@ -4,6 +4,8 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import productController from "../../../controller/ProController/ProductController.js";
+import auth from "../../../middleware/auth.js";
+import admin from "../../../middleware/admin.js";
 const productRouter = express.Router();
 
 const storage = multer.diskStorage({
@@ -28,7 +30,7 @@ const upload = multer({ storage });
 
 productRouter.post(
   "/create",
-  upload.single("image"),
+  upload.single("image"),[auth,admin],
   async (req, res) => {
     try {
       await productController.create(req, res);
