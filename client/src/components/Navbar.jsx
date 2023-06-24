@@ -1,13 +1,11 @@
 import React from "react";
 import TopNavbar from "./TopNavbar";
 import { styled } from "styled-components";
-import AcUnitIcon from "@mui/icons-material/AcUnit";
-import SearchIcon from "@mui/icons-material/Search";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PersonIcon from "@mui/icons-material/Person";
+import Badge from "@mui/material/Badge";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import "./style.css";
 const Navbar = () => {
   return (
@@ -27,15 +25,18 @@ const Navbar = () => {
         </Colum>
         <Colum>
           <Input placeholder="type for search" />
+          <SearchOutlinedIcon className="search" />
           <Icon>
             <li>
-              <FavoriteBorderIcon className="icon"/>
+              <FavoriteBorderIcon className="icon" />
             </li>
             <li>
               <PersonOutlineOutlinedIcon className="icon" />
             </li>
             <li>
-            <ShoppingBagOutlinedIcon className="icon" />
+              <Badge badgeContent={4} color="primary">
+                <ShoppingBagOutlinedIcon className="icon" />
+              </Badge>
             </li>
           </Icon>
         </Colum>
@@ -65,33 +66,33 @@ const Colum = styled.div`
   display: flex;
   align-items: center;
   list-style: none;
+
+  .search {
+    margin-left: -24px;
+  }
 `;
 
 const Icon = styled.ul`
   display: flex;
-  gap: 30px;
+  gap: 50px;
   list-style: none;
   align-items: center;
   margin-top: 10px;
+  margin-left: 150px;
 
-  .icon{
+  .icon {
     font-size: 30px;
   }
 `;
 const Input = styled.input`
-  /* width: 100%;    */
+  border: none;
+  outline: none;
 `;
 
-const Logo = styled.div``;
-const Search = styled.div`
-  display: flex;
-  justify-content: space-between;
+const Logo = styled.div`
+  h2 {
+    margin-left: -130px;
+  }
 `;
-
-const Button = styled.button``;
-
-const CartSign = styled.div``;
-
-const ButtonSite = styled.div``;
 
 export default Navbar;
