@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TopNavbar from "./TopNavbar";
 import { styled } from "styled-components";
 import Badge from "@mui/material/Badge";
@@ -6,25 +6,41 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import "./style.css";
 const Navbar = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen((prevState) => !prevState);
+  };
+
   return (
     <Container>
       <TopNavbar />
-      <Content>
-        <Colum>
+      <Content className="shadow">
+        <Column>
           <Logo>
             <h2>Deal</h2>
           </Logo>
           <Pages>
             <li>Shop</li>
-            <li>Pages</li>
+            <li onMouseEnter={handleDropdownToggle} onMouseLeave={handleDropdownToggle}>
+              Pages <KeyboardArrowDownOutlinedIcon />
+              {isDropdownOpen && (
+                <Dropdown>
+                  <li>About</li>
+                  <li>Services</li>
+                  <li>Gallery</li>
+                </Dropdown>
+              )}
+            </li>
             <li>Blog</li>
             <li>Contact</li>
           </Pages>
-        </Colum>
-        <Colum>
-          <Input placeholder="type for search" />
+        </Column>
+        <Column>
+          <Input placeholder="Type for search" />
           <SearchOutlinedIcon className="search" />
           <Icon>
             <li>
@@ -39,7 +55,7 @@ const Navbar = () => {
               </Badge>
             </li>
           </Icon>
-        </Colum>
+        </Column>
       </Content>
     </Container>
   );
@@ -55,6 +71,27 @@ const Pages = styled.ul`
   align-items: center;
   list-style: none;
   margin-top: 10px;
+
+  li {
+    position: relative;
+    cursor: pointer;
+  }
+`;
+
+const Dropdown = styled.ul`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  list-style: none;
+  padding: 4px 50px;
+  
 `;
 
 const Content = styled.div`
@@ -62,7 +99,8 @@ const Content = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
-const Colum = styled.div`
+
+const Column = styled.div`
   display: flex;
   align-items: center;
   list-style: none;
@@ -84,6 +122,7 @@ const Icon = styled.ul`
     font-size: 30px;
   }
 `;
+
 const Input = styled.input`
   border: none;
   outline: none;
@@ -91,7 +130,7 @@ const Input = styled.input`
 
 const Logo = styled.div`
   h2 {
-    margin-left: -130px;
+    margin-left: -110px;
   }
 `;
 
