@@ -5,45 +5,81 @@ import AcUnitIcon from "@mui/icons-material/AcUnit";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
-import { Row, Col } from "react-bootstrap";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import "./style.css";
 const Navbar = () => {
   return (
     <Container>
       <TopNavbar />
-      <Row>
-        <Col md="3">
-          <AcUnitIcon />
-          RamroChha
-        </Col>
-        <Col md="5" className="search">
-          <Input placeholder="search product and brand" />
-          <ButtonSite>
-            <SearchIcon />
-            <Button>Search </Button>
-          </ButtonSite>
-        </Col>
-        <Col md="4" className="cartSign">
-          <div className="cart">
-            <p>Cart</p> <ShoppingCartIcon />
-          </div>
-          <div className="cart">
-            <p>Sign in</p> <PersonIcon />
-          </div>
-        </Col>
-      </Row>
+      <Content>
+        <Colum>
+          <Logo>
+            <h2>Deal</h2>
+          </Logo>
+          <Pages>
+            <li>Shop</li>
+            <li>Pages</li>
+            <li>Blog</li>
+            <li>Contact</li>
+          </Pages>
+        </Colum>
+        <Colum>
+          <Input placeholder="type for search" />
+          <Icon>
+            <li>
+              <FavoriteBorderIcon className="icon"/>
+            </li>
+            <li>
+              <PersonOutlineOutlinedIcon className="icon" />
+            </li>
+            <li>
+            <ShoppingBagOutlinedIcon className="icon" />
+            </li>
+          </Icon>
+        </Colum>
+      </Content>
     </Container>
   );
 };
 
 const Container = styled.nav`
-  background: #e40046;
-  color: #fff;
   width: 100%;
 `;
 
+const Pages = styled.ul`
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  list-style: none;
+  margin-top: 10px;
+`;
+
+const Content = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+const Colum = styled.div`
+  display: flex;
+  align-items: center;
+  list-style: none;
+`;
+
+const Icon = styled.ul`
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  align-items: center;
+  margin-top: 10px;
+
+  .icon{
+    font-size: 30px;
+  }
+`;
 const Input = styled.input`
-  /* width: 100%; */
+  /* width: 100%;    */
 `;
 
 const Logo = styled.div``;
