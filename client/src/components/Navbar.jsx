@@ -6,13 +6,20 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import MenuIcon from "@mui/icons-material/Menu";
 import "./style.css";
+
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen((prevState) => !prevState);
+  };
+
+  const handleMobileMenuToggle = () => {
+    setIsMobileMenuOpen((prevState) => !prevState);
   };
 
   return (
@@ -23,9 +30,13 @@ const Navbar = () => {
           <Logo>
             <h2>Deal</h2>
           </Logo>
-          <Pages>
+          <MobileMenuIcon onClick={handleMobileMenuToggle} />
+          <Pages isMobileMenuOpen={isMobileMenuOpen}>
             <li>Shop</li>
-            <li onMouseEnter={handleDropdownToggle} onMouseLeave={handleDropdownToggle}>
+            <li
+              onMouseEnter={handleDropdownToggle}
+              onMouseLeave={handleDropdownToggle}
+            >
               Pages <KeyboardArrowDownOutlinedIcon />
               {isDropdownOpen && (
                 <Dropdown>
@@ -76,6 +87,14 @@ const Pages = styled.ul`
     position: relative;
     cursor: pointer;
   }
+
+  @media (max-width: 768px) {
+    display: ${({ isMobileMenuOpen }) => (isMobileMenuOpen ? "flex" : "none")};
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 0 20px;
+  }
 `;
 
 const Dropdown = styled.ul`
@@ -91,13 +110,16 @@ const Dropdown = styled.ul`
   z-index: 1;
   list-style: none;
   padding: 4px 50px;
-  
 `;
 
 const Content = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Column = styled.div`
@@ -107,6 +129,12 @@ const Column = styled.div`
 
   .search {
     margin-left: -24px;
+  }
+
+  @media (max-width: 768px) {
+    &:last-child {
+      margin-top: 20px;
+    }
   }
 `;
 
@@ -121,6 +149,10 @@ const Icon = styled.ul`
   .icon {
     font-size: 30px;
   }
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
 `;
 
 const Input = styled.input`
@@ -131,6 +163,23 @@ const Input = styled.input`
 const Logo = styled.div`
   h2 {
     margin-left: -110px;
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      margin-left: 0;
+    }
+  }
+`;
+
+const MobileMenuIcon = styled(MenuIcon)`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+    font-size: 30px;
+    cursor: pointer;
+    margin-left: 10px;
   }
 `;
 
