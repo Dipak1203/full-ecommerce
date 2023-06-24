@@ -1,34 +1,64 @@
-import React from 'react'
-import Carousel from "react-bootstrap/Carousel";
+import React from "react";
+import { styled } from "styled-components";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper.min.css";
+import SwiperCore, { Pagination, Navigation } from "swiper";
+import "swiper/css/navigation";
+
+SwiperCore.use([Pagination, Navigation]);
 
 const CarouselComponent = () => {
   return (
     <div>
-       <Carousel>
-          <Carousel.Item className="img">
+      <Content>
+        <Swiper navigation={true} loop={true} className="mySwiper">
+          <SwiperSlide>
             <img
               className="d-block w-100"
-              src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
-              alt="First slide"
+              src="https://media.istockphoto.com/id/1284690585/photo/colorful-vegetables-and-fruits-vegan-food-in-rainbow-colors.jpg?b=1&s=612x612&w=0&k=20&c=5RBa1kuAewlJF1CGc_fMAskRQ9ZV4wRPrXJp2wVjIno="
             />
-          </Carousel.Item>
-          <Carousel.Item className="img">
+          </SwiperSlide>
+          <SwiperSlide>
             <img
               className="d-block w-100"
-              src="https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=872&q=80"
-              alt="Second slide"
+              src="https://media.istockphoto.com/id/1280856062/photo/variety-of-fresh-organic-vegetables-and-fruits-in-the-garden.jpg?b=1&s=612x612&w=0&k=20&c=OYwjDZurYkufLIL2fne0_bNZDgA9C9bhyhtb5QVzgiE="
             />
-          </Carousel.Item>
-          <Carousel.Item className="img">
+          </SwiperSlide>
+          <SwiperSlide>
             <img
               className="d-block w-100"
-              src="https://images.unsplash.com/photo-1591085686350-798c0f9faa7f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1031&q=80"
-              alt="Third slide"
+              src="https://media.istockphoto.com/id/1222581489/photo/farmer-woman-holding-wooden-box-full-of-fresh-raw-vegetables.jpg?b=1&s=612x612&w=0&k=20&c=96lbsd7LHWJwHYeaTLIkpxgaji9BSZ5MZ8_SJplISdo="
             />
-          </Carousel.Item>
-        </Carousel>
+          </SwiperSlide>
+        </Swiper>
+      </Content>
     </div>
-  )
-}
+  );
+};
 
-export default CarouselComponent
+const Content = styled.section`
+  .mySwiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+export default CarouselComponent;
