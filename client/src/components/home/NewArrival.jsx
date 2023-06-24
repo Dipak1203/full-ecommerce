@@ -68,7 +68,7 @@ const NewArrival = () => {
 
   return (
     <div>
-      <h2>Responsive Product Carousel</h2>
+      <h2>New Arrival </h2>
       <Slider {...settings}>
         {slides.map((slide, index) => (
           <div key={index}>

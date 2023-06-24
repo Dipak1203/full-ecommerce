@@ -1,7 +1,4 @@
-.App {
-    font-family: sans-serif;
-    text-align: center;
-  }
+
   .slick-track {
     display: flex;
   }
@@ -11,11 +8,20 @@
     max-width: 1200px;
     margin: 0 auto;
   }
-  
+  .product{
+    cursor: pointer;
+  }
   .slick-slide {
     padding-right: 10px;
   }
-  
+  .img{
+    transition:.4s ease all;
+    overflow: hidden;
+  }
+  .img:hover{
+    scale: 1.1;
+    transition:.4s ease all;
+  }
   .slick-slide:last-child {
     padding-right: 0;
   }
