@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { styled } from "styled-components";
+import Button from "../../scenes/Button";
 
 const JustForYou = () => {
   const responsive = {
@@ -98,6 +99,9 @@ const JustForYou = () => {
           {generateProducts()}
         </Carousel>
       </Content>
+      <div className="my-5 text-center">
+        <Button title="Explore More"/>
+      </div>
     </Container>
   );
 };
