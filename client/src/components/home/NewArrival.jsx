@@ -5,6 +5,7 @@ import ProductCard from "./Product";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.css";
+import { Container } from "react-bootstrap";
 
 const NewArrival = () => {
   const slides = [
@@ -67,8 +68,8 @@ const NewArrival = () => {
   };
 
   return (
-    <div>
-      <h2>New Arrival </h2>
+    <Container>
+      <h3 className="my-5">New Arrival </h3>
       <Slider {...settings}>
         {slides.map((slide, index) => (
           <div key={index}>
@@ -77,7 +78,7 @@ const NewArrival = () => {
           </div>
         ))}
       </Slider>
-    </div>
+    </Container>
   );
 };
 
