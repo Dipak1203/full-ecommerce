@@ -10,7 +10,6 @@ function Home() {
       <HeroSection />
       <NewArrival />
       <JustForYou />
-      <Download />
     </Content>
   );
 }

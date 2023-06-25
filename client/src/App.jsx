@@ -4,6 +4,8 @@ import Navbar from './components/Navbar'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home';
+import Download from './components/home/Download';
+import FooterComponent from './components/Footer';
 const App = () => {
   return (
    <BrowserRouter>
@@ -11,6 +13,8 @@ const App = () => {
     <Routes>
      <Route path='/' element={<Home />} />
     </Routes>
+    <Download />
+    <FooterComponent />
    </BrowserRouter>
   )
 }
