@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import styled from 'styled-components';
 import Button from '../scenes/Button';
+import FooterBottom from './FooterBottom';
 
 const FooterComponent = () => {
   return (
@@ -16,6 +17,7 @@ const FooterComponent = () => {
           </ButtonContainer>
         </FormContainer>
       </Container>
+      <FooterBottom className="my-5"/>
     </Footer>
   );
 };
