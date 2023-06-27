@@ -3,7 +3,7 @@ import CarouselComponent from "./CarouselComponent";
 import Ad from "./Ad";
 const HeroSection = () => {
   return (
-    <Container fluid>
+    <Container fluid className='mt-5'>
     <Row>
       <Col md="3">
         <Ad />
