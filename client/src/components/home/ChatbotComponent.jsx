@@ -4,23 +4,14 @@ import { ThemeProvider } from 'styled-components';
 const steps = [
 	{
 		id: '0',
-		message: 'Hey Geek!',
-
-		// This calls the next id
-		// i.e. id 1 in this case
+		message: 'Hey User!',
 		trigger: '1',
 	}, {
 		id: '1',
-
-		// This message appears in
-		// the bot chat bubble
 		message: 'Please write your username',
 		trigger: '2'
 	}, {
 		id: '2',
-
-		// Here we want the user
-		// to enter input
 		user: true,
 		trigger: '3',
 	}, {
@@ -30,12 +21,8 @@ const steps = [
 	}, {
 		id: '4',
 		options: [
-			
-			// When we need to show a number of
-			// options to choose we create alist
-			// like this
-			{ value: 1, label: 'View Courses' },
-			{ value: 2, label: 'Read Articles' },
+			{ value: 1, label: 'View Product' },
+			{ value: 2, label: 'Explore Product' },
 
 		],
 		end: true
@@ -56,7 +43,7 @@ const theme = {
 
 // Set some properties of the bot
 const config = {
-	botAvatar: "img.png",
+	botAvatar: "https://cdn.dribbble.com/users/587589/screenshots/11244192/carter_2_300_perc.png",
 	floating: true,
 };
 
