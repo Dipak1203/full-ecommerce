@@ -9,6 +9,7 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./style.css";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -58,7 +59,9 @@ const Navbar = () => {
               <FavoriteBorderIcon className="icon" />
             </li>
             <li>
-              <PersonOutlineOutlinedIcon className="icon" />
+            <NavLink to="signup">
+            <PersonOutlineOutlinedIcon className="icon" />
+            </NavLink>
             </li>
             <li>
               <Badge badgeContent={4} color="primary">

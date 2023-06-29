@@ -3,12 +3,16 @@ import { styled } from 'styled-components'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 const Login = () => {
+    const google = () => {
+        window.open("http://localhost:8000/auth/google", "_self");
+      };
+    
   return (
     <div className='container-fluid m-0 p-0'>
         <Container>
                <div className='login'>
                <h3 className='text-center'>Choose a method to sign</h3>
-               <button className='google'>
+               <button className='google' onClick={google}>
                     <GoogleIcon className='icon'/> Login With Google
                 </button>
                 <button className='facebook'>
