@@ -1,39 +1,52 @@
-import GoogleStrategy from "passport-google-oauth20";
 import passport from "passport";
-import "dotenv/config";
-import User from "../models/user.js";
-const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:8000/auth/google/callback",
-    },
-    async function (accessToken, refreshToken, profile, cb) {
+import express from 'express';
 
-      // User.findOrCreate({ googleId: profile.id,name:profile.displayName,email:profile.email }, function (err, user) {
-      //   return cb(err, user);
-      // }).save()
-      await User.findOne({
-        googleId: profile.id
-      }) || await User.create({
-        googleId: profile.id,
-        name: profile.displayName,
-        email: profile._json.email,
-        image: profile._json.picture
-      })
-      console.log(profile);
-      return cb(null, profile);
-      //   });
-    }
-  )
+
+const AuthRouter = express.Router();
+
+AuthRouter.use(passport.initialize());
+AuthRouter.use(passport.session());
+
+function validateLogin(req, res, next) {
+  req.user ? next() : res.sendStatus(401);
+}
+
+
+AuthRouter.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-passport.serializeUser(function (user, cb) {
-  cb(null, user);
+AuthRouter.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "http://localhost:5173",
+    failureRedirect: "/auth/error",
+  })
+);
+
+AuthRouter.get("/login/success", (req, res) => {
+  if (req.user) {
+    res.status(200).json({
+      success: true,
+      message: "successfull",
+      user: req.user,
+      //   cookies: req.cookies
+    });
+  }
+});
+AuthRouter.get("/", validateLogin, (req, res) => {
+  res.redirect('http://localhost:5173/')
 });
 
-passport.deserializeUser(function (user, cb) {
-  cb(null, user);
+
+AuthRouter.get("/auth/error", (req, res) => {
+  res.send("Error occured");
 });
+
+
+
+
+
+
+export default AuthRouter;
