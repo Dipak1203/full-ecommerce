@@ -10,5 +10,6 @@ export const {
     REFRESH_SECRET,
     CLIENT_URL,
     GOOGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET
+    GOOGLE_CLIENT_SECRET,
+    SESSION_SECRET
 } = process.env

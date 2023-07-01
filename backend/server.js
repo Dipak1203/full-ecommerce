@@ -1,5 +1,5 @@
 import express from 'express';
-import { SERVER_PORT, DB_URL,CLIENT_URL } from './config/index.js';
+import { SERVER_PORT, DB_URL,CLIENT_URL,SESSION_SECRET} from './config/index.js';
 import router from './routes/index.js';
 import errorHandle from './middleware/errorHandling.js';
 import mongoose from 'mongoose';
@@ -24,10 +24,9 @@ app.use(cors(corsOptions));
 
 app.use(
   session({
-    secret: process.env.SECRET,
+    secret: SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
-    cookie: { secure: true },
+    saveUninitialized: true,
   })
 );
 app.use(express.json());
