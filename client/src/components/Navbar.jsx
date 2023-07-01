@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import TopNavbar from "./TopNavbar";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import Badge from "@mui/material/Badge";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -14,6 +13,23 @@ import { NavLink } from "react-router-dom";
 const Navbar = ({ user }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.pageYOffset > 0) {
+        setIsScrolled(false);
+      } else {
+        setIsScrolled(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen((prevState) => !prevState);
@@ -25,8 +41,7 @@ const Navbar = ({ user }) => {
 
   return (
     <Container>
-      <TopNavbar />
-      <Content className="shadow">
+      <Content className={`shadow ${isScrolled ? "hide" : ""}`}>
         <Column>
           <Logo>
             <h2>Deal</h2>
@@ -60,7 +75,7 @@ const Navbar = ({ user }) => {
             </li>
             <li>
               {user ? (
-                <Img src={user.image} alt="img"  />
+                <Img src={user.image} alt="img" />
               ) : (
                 <NavLink to="signup">
                   <PersonOutlineOutlinedIcon className="icon" />
@@ -81,6 +96,12 @@ const Navbar = ({ user }) => {
 
 const Container = styled.nav`
   width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 100;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const Pages = styled.ul`
@@ -120,14 +141,30 @@ const Dropdown = styled.ul`
 `;
 
 const Content = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  padding: 10px 20px; /* Adjust the padding as needed */
+  background-color: #fff;
+  z-index: 100;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+
+  &.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
 
   @media (max-width: 768px) {
-    flex-direction: column;
+    padding: 10px;
   }
 `;
+
 
 const Column = styled.div`
   display: flex;
@@ -146,10 +183,9 @@ const Column = styled.div`
 `;
 
 const Img = styled.img`
-
   width: 50%;
   border-radius: 50%;
-`
+`;
 
 const Icon = styled.ul`
   display: flex;

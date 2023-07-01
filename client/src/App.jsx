@@ -6,7 +6,7 @@ import Navbar from './components/Navbar';
 import Download from './components/home/Download';
 import FooterComponent from './components/Footer';
 import Login from './authentication/Login';
-
+import TopNavbar from './components/TopNavbar'
 const App = () => {
   const [user, setUser] = useState(null);
 
@@ -41,11 +41,13 @@ const App = () => {
 
   return (
     <BrowserRouter>
+
       <Routes>
         <Route
           path="/"
           element={
             <>
+            <TopNavbar />
               <Navbar user={user} />
               <Home />
               <Download />
