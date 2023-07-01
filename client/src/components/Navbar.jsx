@@ -48,6 +48,9 @@ const Navbar = ({ user }) => {
           </Logo>
           <MobileMenuIcon onClick={handleMobileMenuToggle} />
           <Pages>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
             <li>Shop</li>
             <li
               onMouseEnter={handleDropdownToggle}
@@ -76,7 +79,7 @@ const Navbar = ({ user }) => {
             <li>
               {user ? (
                 <NavLink to={`/user/profile/${user.googleId}`}>
-                <Img src={user.image} alt="img" />
+                  <Img src={user.image} alt="img" />
                 </NavLink>
               ) : (
                 <NavLink to="signup">
@@ -84,6 +87,13 @@ const Navbar = ({ user }) => {
                 </NavLink>
               )}
             </li>
+            {user ? (
+              <li>
+                <NavLink to="/">Logout</NavLink>
+              </li>
+            ) : (
+              <></>
+            )}
             <li>
               <Badge badgeContent={4} color="primary">
                 <ShoppingBagOutlinedIcon className="icon" />
@@ -150,7 +160,6 @@ const Content = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px; /* Adjust the padding as needed */
   background-color: #fff;
   z-index: 100;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
@@ -167,12 +176,14 @@ const Content = styled.div`
   }
 `;
 
-
 const Column = styled.div`
   display: flex;
   align-items: center;
   list-style: none;
-
+  a{
+    text-decoration: none;
+    color: #000;
+  }
   .search {
     margin-left: -24px;
   }
