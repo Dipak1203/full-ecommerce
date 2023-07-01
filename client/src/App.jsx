@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home';
@@ -8,6 +8,37 @@ import FooterComponent from './components/Footer';
 import Login from './authentication/Login';
 
 const App = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/login/success", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
+        });
+        
+        if (response.status === 200) {
+          const resObject = await response.json();
+          setUser(resObject.user);
+        } else {
+          throw new Error("Authentication has failed!");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getUser();
+  }, []);
+
+  console.log(user)
+
   return (
     <BrowserRouter>
       <Routes>
@@ -15,7 +46,7 @@ const App = () => {
           path="/"
           element={
             <>
-              <Navbar />
+              <Navbar user={user} />
               <Home />
               <Download />
               <FooterComponent />

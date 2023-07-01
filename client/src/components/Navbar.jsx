@@ -11,7 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import "./style.css";
 import { NavLink } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -32,7 +32,7 @@ const Navbar = () => {
             <h2>Deal</h2>
           </Logo>
           <MobileMenuIcon onClick={handleMobileMenuToggle} />
-          <Pages isMobileMenuOpen={isMobileMenuOpen}>
+          <Pages>
             <li>Shop</li>
             <li
               onMouseEnter={handleDropdownToggle}
@@ -59,9 +59,13 @@ const Navbar = () => {
               <FavoriteBorderIcon className="icon" />
             </li>
             <li>
-            <NavLink to="signup">
-            <PersonOutlineOutlinedIcon className="icon" />
-            </NavLink>
+              {user ? (
+                <Img src={user.image} alt="img"  />
+              ) : (
+                <NavLink to="signup">
+                  <PersonOutlineOutlinedIcon className="icon" />
+                </NavLink>
+              )}
             </li>
             <li>
               <Badge badgeContent={4} color="primary">
@@ -92,7 +96,7 @@ const Pages = styled.ul`
   }
 
   @media (max-width: 768px) {
-    display: ${({ isMobileMenuOpen }) => (isMobileMenuOpen ? "flex" : "none")};
+    display: none;
     flex-direction: column;
     gap: 10px;
     margin-top: 20px;
@@ -140,6 +144,12 @@ const Column = styled.div`
     }
   }
 `;
+
+const Img = styled.img`
+
+  width: 50%;
+  border-radius: 50%;
+`
 
 const Icon = styled.ul`
   display: flex;
