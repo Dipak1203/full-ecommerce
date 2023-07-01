@@ -1,50 +1,63 @@
 import express from 'express';
-import {SERVER_PORT,DB_URL} from './config/index.js';
+import { SERVER_PORT, DB_URL,CLIENT_URL } from './config/index.js';
 import router from './routes/index.js';
 import errorHandle from './middleware/errorHandling.js';
 import mongoose from 'mongoose';
-import path from 'path'
+import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 const app = express();
-import cors from 'cors'
+import cors from 'cors';
 import session from 'express-session';
-import './routes/auth.js'
+import './routes/auth.js';
+import passport from 'passport';
+import './controller/authentication/Signup.js';
 import AuthRouter from './routes/auth.js';
-import "./controller/authentication/Signup.js"
 
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  cookie: { secure: true }
-}))
+const corsOptions = {
+  origin: CLIENT_URL,
+  method:"GET,POST,PUT,DELETE",
+  credentials: true,
+};
 
-app.use(express.json())
-app.use(express.urlencoded({extended:false}))
-app.use(cors())
-app.use('/api',router);
-app.use('/',AuthRouter);
+app.use(cors(corsOptions));
+
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: true },
+  })
+);
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/api', router);
+app.use('/', AuthRouter);
+
 // global variable
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 global.appRoot = path.resolve(__dirname);
 
-
-
-
-
-
 // Database connection
 mongoose.connect(DB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
-    console.log('DB connected...');
+  console.log('DB connected...');
 });
+
 app.use(errorHandle);
-app.listen(SERVER_PORT,() =>{
-    console.log(`server is running on port ${SERVER_PORT}`)
-})
+
+
+app.listen(SERVER_PORT, () => {
+  console.log(`server is running on port ${SERVER_PORT}`);
+});

@@ -8,4 +8,7 @@ export const {
     DB_URL,
     JWT_SECRET,
     REFRESH_SECRET,
+    CLIENT_URL,
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET
 } = process.env
