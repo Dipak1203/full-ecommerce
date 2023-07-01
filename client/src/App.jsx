@@ -6,7 +6,9 @@ import Navbar from './components/Navbar';
 import Download from './components/home/Download';
 import FooterComponent from './components/Footer';
 import Login from './authentication/Login';
-import TopNavbar from './components/TopNavbar'
+import TopNavbar from './components/TopNavbar';
+import Dashboard from './pages/users/Dashboard';
+
 const App = () => {
   const [user, setUser] = useState(null);
 
@@ -22,10 +24,11 @@ const App = () => {
             "Access-Control-Allow-Credentials": true,
           },
         });
-        
+
         if (response.status === 200) {
           const resObject = await response.json();
           setUser(resObject.user);
+          localStorage.setItem('user', JSON.stringify(resObject.user)); 
         } else {
           throw new Error("Authentication has failed!");
         }
@@ -34,20 +37,23 @@ const App = () => {
       }
     };
 
-    getUser();
+    const storedUser = localStorage.getItem('user'); // Retrieve user from local storage
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    } else {
+      getUser();
+    }
   }, []);
 
-  console.log(user)
 
   return (
     <BrowserRouter>
-
       <Routes>
         <Route
           path="/"
           element={
             <>
-            <TopNavbar />
+              <TopNavbar />
               <Navbar user={user} />
               <Home />
               <Download />
@@ -55,6 +61,7 @@ const App = () => {
             </>
           }
         />
+        <Route path='/user/profile/:id' element={<Dashboard user={user}/>}/>
         <Route path="/signup" element={<Login />} />
       </Routes>
     </BrowserRouter>

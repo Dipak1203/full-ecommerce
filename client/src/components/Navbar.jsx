@@ -75,7 +75,9 @@ const Navbar = ({ user }) => {
             </li>
             <li>
               {user ? (
+                <NavLink to={`/user/profile/${user.googleId}`}>
                 <Img src={user.image} alt="img" />
+                </NavLink>
               ) : (
                 <NavLink to="signup">
                   <PersonOutlineOutlinedIcon className="icon" />
