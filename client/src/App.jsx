@@ -28,7 +28,7 @@ const App = () => {
         if (response.status === 200) {
           const resObject = await response.json();
           setUser(resObject.user);
-          localStorage.setItem("user", JSON.stringify(resObject.user));
+          localStorage.setItem("user", JSON.stringify(resObject.user._id));
         } else {
           throw new Error("Authentication has failed!");
         }

@@ -9,12 +9,11 @@ import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDown
 import MenuIcon from "@mui/icons-material/Menu";
 import "./style.css";
 import { NavLink } from "react-router-dom";
-
+import axios from 'axios'
 const Navbar = ({ user }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.pageYOffset > 0) {
@@ -38,7 +37,13 @@ const Navbar = ({ user }) => {
   const handleMobileMenuToggle = () => {
     setIsMobileMenuOpen((prevState) => !prevState);
   };
-
+  const logout = () => {
+    // Cookies.remove('cookieName');
+    sessionStorage.clear();
+    localStorage.clear();
+    window.location.href = "/";
+  };
+  
   return (
     <Container>
       <Content className={`shadow ${isScrolled ? "hide" : ""}`}>
@@ -89,7 +94,7 @@ const Navbar = ({ user }) => {
             </li>
             {user ? (
               <li>
-                <NavLink to="/">Logout</NavLink>
+                <NavLink to="/" onClick={logout}>Logout</NavLink>
               </li>
             ) : (
               <></>
