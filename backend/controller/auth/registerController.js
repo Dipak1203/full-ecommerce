@@ -1,21 +1,12 @@
 import Joi from "joi";
 import CustomErrorHandler from "../../service/CustomErrorHandler.js";
-import { User,RefreshToken } from "../../models/index.js";
+import { RefreshToken } from "../../models/index.js";
+import Admin from "../../models/admin.js";
 import bcrypt from 'bcrypt';
 import JwtService from "../../service/JwtService.js";
 import {REFRESH_SECRET} from '../../config/index.js'
 const registerController = {
   async register(req, res, next) {
-    // CheckList
-    /*
-                        Validate the request
-                        authorize the request
-                        check if user is in the database already
-                        prepare model 
-                        store in database 
-                        generate jwt token 
-                        send response
-                */
 
     // validation
     const registerSchema = Joi.object({
@@ -35,7 +26,7 @@ const registerController = {
 
     //     // check if user is in the database already
     try {
-      const exist = await User.exists({ email: req.body.email });
+      const exist = await Admin.exists({ email: req.body.email });
       if (exist) {
         return next(
           CustomErrorHandler.alreadyExist("This email is already taken.")
@@ -45,14 +36,14 @@ const registerController = {
       return next(err);
     }
 
-    const {name,email,password} = req.body;
+    const {name,email} = req.body;
 
     // Hash Password
     const hashedPassword = await bcrypt.hash(req.body.password,10);
 
 
     // prepare the model
-      const user = new User({
+      const user = new Admin({
           name,
           email,
           password:hashedPassword

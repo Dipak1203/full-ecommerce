@@ -87,10 +87,17 @@ AuthRouter.get("/login/failed", (req, res) => {
   });
 });
 
-AuthRouter.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect(CLIENT_URL);
+AuthRouter.get("/user/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log("Error destroying session:", err);
+    } else {
+      res.clearCookie("user");
+      res.redirect("/");
+    }
+  });
 });
+
 
 passport.serializeUser((user, done) => {
   done(null, user);

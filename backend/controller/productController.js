@@ -67,6 +67,7 @@ const productController = {
                 price,
                 size,
                 image: filePath,
+                category
             });
         } catch (err) {
             return next(err);
