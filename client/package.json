@@ -18,6 +18,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
     "dotenv": "^16.3.1",
+    "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-chatbot-kit": "^2.1.2",

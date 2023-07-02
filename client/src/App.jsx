@@ -21,14 +21,13 @@ const App = () => {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            "Access-Control-Allow-Credentials": true,
           },
         });
 
-        if (response.status === 200) {
+        if (response.ok) {
           const resObject = await response.json();
           setUser(resObject.user);
-          localStorage.setItem("user", JSON.stringify(resObject.user._id));
+          localStorage.setItem("user", JSON.stringify(resObject.user));
         } else {
           throw new Error("Authentication has failed!");
         }
@@ -37,7 +36,7 @@ const App = () => {
       }
     };
 
-    const storedUser = localStorage.getItem("user"); // Retrieve user from local storage
+    const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     } else {
@@ -45,10 +44,25 @@ const App = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  console.log("Hello World", user);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    console.log("Logout successful");
+  };
+
   return (
     <BrowserRouter>
       <TopNavbar />
-      <Navbar user={user} />
+      <Navbar user={user} handleLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/user/profile/:id" element={<Dashboard user={user} />} />

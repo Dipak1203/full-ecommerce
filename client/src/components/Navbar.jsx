@@ -10,7 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import "./style.css";
 import { NavLink } from "react-router-dom";
 import axios from 'axios'
-const Navbar = ({ user }) => {
+const Navbar = ({ user,handleLogout }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -38,11 +38,16 @@ const Navbar = ({ user }) => {
     setIsMobileMenuOpen((prevState) => !prevState);
   };
   const logout = () => {
-    // Cookies.remove('cookieName');
-    sessionStorage.clear();
-    localStorage.clear();
-    window.location.href = "/";
+    // document.cookie = 'user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    // sessionStorage.clear();
+    // localStorage.clear();
+    
+    // setTimeout(() => {
+    //   window.location.href = "/";
+    // }, 100);
+    handleLogout();
   };
+  
   
   return (
     <Container>
@@ -94,7 +99,7 @@ const Navbar = ({ user }) => {
             </li>
             {user ? (
               <li>
-                <NavLink to="/" onClick={logout}>Logout</NavLink>
+                <NavLink to="/" onClick={handleLogout}>Logout</NavLink>
               </li>
             ) : (
               <></>
