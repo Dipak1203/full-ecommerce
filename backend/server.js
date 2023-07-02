@@ -14,6 +14,8 @@ import passport from 'passport';
 import './controller/authentication/Signup.js';
 import AuthRouter from './routes/auth.js';
 
+const appRoot = dirname(fileURLToPath(import.meta.url));
+
 const corsOptions = {
   origin: CLIENT_URL,
   method:"GET,POST,PUT,DELETE",
@@ -60,3 +62,5 @@ app.use(errorHandle);
 app.listen(SERVER_PORT, () => {
   console.log(`server is running on port ${SERVER_PORT}`);
 });
+
+export default appRoot;

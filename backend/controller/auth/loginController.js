@@ -1,6 +1,6 @@
 import Joi from "joi";
-import User from "../../models/user.js";
 import bcrypt from "bcrypt";
+import Admin from '../../models/admin.js'
 import CustomErrorHandler from "../../service/CustomErrorHandler.js";
 import JwtService from "../../service/JwtService.js";
 import { REFRESH_SECRET } from "../../config/index.js";
@@ -22,7 +22,7 @@ const loginController = {
 
     // if user exist or not
     try {
-      const user = await User.findOne({ email: req.body.email });
+      const user = await Admin.findOne({ email: req.body.email });
       if (!user) {
         return next(CustomErrorHandler.wrongCredentials());
       }
