@@ -47,15 +47,16 @@ const productController = {
         if (req.file) {
           fs.unlink(path.join(appRoot, filePath), (err) => {
             if (err) {
-              return next(CustomErrorHandler.serverError());
+              res.json({ message: "errors" });
+              // return next(CustomErrorHandler.serverError());
             }
           });
         }
-
-        return next(error);
+        // return next(error);
+        res.json({ message: "errorss" });
       }
 
-      const { name, price, size, category } = req.body;
+      const { name, price, size, category, searchKey, gender } = req.body;
 
       let document;
       try {
@@ -65,6 +66,8 @@ const productController = {
           size,
           image: filePath,
           category,
+          searchKey,
+          gender,
         });
       } catch (err) {
         res.json({ message: "error" });

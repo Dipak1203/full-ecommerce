@@ -6,7 +6,9 @@ const productSchema = Joi.object({
     price: Joi.number().required(),
     size: Joi.string().required(),
     image: Joi.string(),
-    category: Joi.string().required()
+    category: Joi.string().required(),
+    searchKey: Joi.string().required(),
+    gender: Joi.string().required(),
 });
 
 export default productSchema;

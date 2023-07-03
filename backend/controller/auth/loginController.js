@@ -30,11 +30,13 @@ const loginController = {
       // compare the password
       const match = await bcrypt.compare(req.body.password, user.password);
       if (!match) {
+        console.log("Not match")
         return next(CustomErrorHandler.wrongCredentials());
       }
 
-      // Toekn
+      // Token
       const access_token = JwtService.sign({ _id: user._id, role: user.role });
+      
       const refresh_token = JwtService.sign(
         { _id: user._id, role: user.role },
         "1y",
