@@ -10,7 +10,7 @@ const productSchema = new Schema(
     image: { type: String, required: true },
     category: { type: String, required: true },
     searchKey: { type: String, required: true },
-    gender:{type:String}
+    gender: { type: String, required: true },
   },
   { timestamps: true }
 );

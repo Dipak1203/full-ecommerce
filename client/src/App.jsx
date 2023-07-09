@@ -51,12 +51,10 @@ const App = () => {
     }
   }, []);
 
-  console.log("Hello World", user);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
-    console.log("Logout successful");
   };
 
   return (

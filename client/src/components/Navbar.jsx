@@ -8,6 +8,7 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./style.css";
+import Tooltip from '@mui/material/Tooltip';
 import { NavLink } from "react-router-dom";
 import axios from 'axios'
 const Navbar = ({ user,handleLogout }) => {
@@ -36,16 +37,6 @@ const Navbar = ({ user,handleLogout }) => {
 
   const handleMobileMenuToggle = () => {
     setIsMobileMenuOpen((prevState) => !prevState);
-  };
-  const logout = () => {
-    // document.cookie = 'user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    // sessionStorage.clear();
-    // localStorage.clear();
-    
-    // setTimeout(() => {
-    //   window.location.href = "/";
-    // }, 100);
-    handleLogout();
   };
   
   
@@ -92,9 +83,12 @@ const Navbar = ({ user,handleLogout }) => {
                   <Img src={user.image} alt="img" />
                 </NavLink>
               ) : (
+
+                <Tooltip title="Signup">
                 <NavLink to="signup">
                   <PersonOutlineOutlinedIcon className="icon" />
                 </NavLink>
+                </Tooltip>
               )}
             </li>
             {user ? (
@@ -175,6 +169,7 @@ const Content = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
+  padding: 0px 30px;
 
   &.hide {
     opacity: 0;

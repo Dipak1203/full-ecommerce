@@ -32,7 +32,6 @@ const productController = {
   async store(req, res, next) {
     handleMultipartData(req, res, async (err) => {
       if (err) {
-        console.log(err); // Add this line to log the error details
         return next(CustomErrorHandler.serverError(err.message));
       }
       let filePath;
@@ -47,13 +46,11 @@ const productController = {
         if (req.file) {
           fs.unlink(path.join(appRoot, filePath), (err) => {
             if (err) {
-              res.json({ message: "errors" });
-              // return next(CustomErrorHandler.serverError());
+              return next(CustomErrorHandler.serverError());
             }
           });
         }
-        // return next(error);
-        res.json({ message: "errorss" });
+        return next(error);
       }
 
       const { name, price, size, category, searchKey, gender } = req.body;
@@ -102,7 +99,7 @@ const productController = {
         // rootfolder/uploads/filename.png
       }
 
-      const { name, price, size } = req.body;
+      const { name, price, size,category,searchKey,gender} = req.body;
       let document;
       try {
         document = await Product.create({
