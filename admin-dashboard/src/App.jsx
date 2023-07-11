@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./components/pages/Dashboard";
@@ -17,33 +17,18 @@ import ProductForm from "./components/forms/ProductForm";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Logout from "./components/auth/Logout";
 
+const PrivateRoute = ({ element }) => {
+  // Implement your authentication logic here
+  // You can redirect to the login page if the user is not authenticated
+  // Example: if (!authenticated) return <Navigate to="/login" />;
+  // Otherwise, render the component passed as the `element` prop
+  return element;
+};
+
 const App = () => {
   return (
     <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
-  );
-};
-
-export default App;
-
-const AppContent = () => {
-  const location = useLocation();
-  const isLoggedIn = !!localStorage.getItem("token");
-
-  // Check if the current route is the Login route
-  const isLoginPage = location.pathname === "/";
-
-  const PrivateRoute = ({ element, path }) => {
-    if (!isLoggedIn && !isLoginPage) {
-      return <Navigate to="/" />;
-    }
-    return element;
-  };
-
-  return (
-    <>
-      {!isLoginPage && <Sidebar />}
+      <Sidebar />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
@@ -59,6 +44,8 @@ const AppContent = () => {
         <Route path="/logout" element={<PrivateRoute element={<Logout />} />} />
       </Routes>
       <ToastContainer />
-    </>
+    </BrowserRouter>
   );
 };
+
+export default App;
